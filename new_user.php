@@ -95,10 +95,12 @@ EOT;
                 'licence_type' => filter_input(INPUT_POST, 'licenceType'),
                 'occupation' => filter_input(INPUT_POST, 'occupation')
             );
-            $reply = send_request($fields, 'POST');
+            $reply = send_request($fields, 'POST', 'people');
             if (isset($reply['created_at'])) {
-                $_SESSION['api_key'] = $reply[$api_key];
+                session_start();
+                $_SESSION['api_key'] = $reply['api_key'];
                 header('location: new_address.php');
+                exit();
             } else {
 
                 #PRINT FORM WITH ERRORS

@@ -14,11 +14,12 @@ and open the template in the editor.
     <body>
         <div>
             <?php
+            session_start();
             $form_header = "<div class='container'>
     <div class='panel panel-primary'>
         <div class='panel-heading'>Address</div>
         <div class='panel-body'>
-            <form role='form' action=new_address.php id='new_address' >
+            <form role='form' method='POST' action=new_address.php id='new_address' >
                 ";
             $form_html = "
 <div class = 'form-group'>
@@ -38,7 +39,6 @@ and open the template in the editor.
                     <label for = 'inputPoscode'>Postcode</label>
                     <input type = 'text' class = 'form-control' name = 'postcode' id = 'inputPoscode'><br>
                 </div>
-                <input type='hidden' name='REQUEST_METHOD' value='POST'/>
                 <button type='submit' class='btn btn-primary' name='submit_address'>Submit</button>
             </form>
         </div>
@@ -46,19 +46,25 @@ and open the template in the editor.
 </div>
 ";
             if (isset($_POST['submit_address'])) {
-
-                include 'forms/underwriter_connector.php';
+                var_dump($_POST);
+                include_once 'forms/constants.php';
+                include_once 'forms/underwriter_connector.php';
+                var_dump($_SESSION);
                 $fields = array(
                     'name_number' => filter_input(INPUT_POST, 'name_number'),
                     'street' => filter_input(INPUT_POST, 'street'),
                     'city' => filter_input(INPUT_POST, 'city'),
+                    'county' => filter_input(INPUT_POST, 'county'),
                     'postcode' => filter_input(INPUT_POST, 'postcode'),
-                    'api_key' => $_SESSION[$api_key]
+                    'api_key' => $_SESSION['api_key']
                 );
-                $reply = send_request($fields, 'POST');
-                if (isset($decoded_reply['created_at'])) {
+                $reply = send_request($fields, 'POST', 'addresses');
+                
+                    var_dump($reply);
+                if (isset($reply['created_at'])) {
                     header('location: new_vehicle.php');
                 } else {
+                    include 'forms/errors.php';
                     echo $form_header;
                     echo errors_to_html($reply);
                     echo $form_html;

@@ -17,7 +17,7 @@ and open the template in the editor.
     <div class='panel panel-primary'>
         <div class='panel-heading'>Vehicle</div>
         <div class='panel-body'>
-            <form role='form' action=new_vehicle.php id='vehicle' >";
+            <form role='form' method='POST' action=new_vehicle.php id='vehicle' >";
             $form_html = "
                 <div class='form-group'>
                     <label for='inputRegistration'>Vehicle Registration</label>
@@ -57,7 +57,7 @@ and open the template in the editor.
                     echo 'SUCCESSS!!!!';
                     header('location: new_incident.php');
                 } else {
-
+                    include 'forms/underwriter_connector.php';
                     #PRINT FORM WITH ERRORS
                     echo $form_header;
                     echo errors_to_html($reply);

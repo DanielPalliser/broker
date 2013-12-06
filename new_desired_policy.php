@@ -17,7 +17,7 @@ and open the template in the editor.
     <div class='panel panel-primary'>
         <div class='panel-heading'>Desired Policy</div>
         <div class='panel-body'>
-            <form role='form' action=new_desired_policy.php id='desired_policy' >";
+            <form role='form' method='POST' action=new_desired_policy.php id='desired_policy' >";
             $form_html = "
                 <div class = 'form-group'>
                     <label for = 'inputExcess'>Policy Excess</label>
@@ -58,7 +58,7 @@ and open the template in the editor.
                     echo 'SUCCESSS!!!!';
                     header('location: new_address.php');
                 } else {
-
+            include 'forms/errors.php';
                     #PRINT FORM WITH ERRORS
                     echo $form_header;
                     echo errors_to_html($reply);

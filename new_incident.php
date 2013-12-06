@@ -17,7 +17,7 @@ and open the template in the editor.
     <div class='panel panel-primary'>
         <div class='panel-heading'>Incident</div>
         <div class='panel-body'>
-            <form role='form' action=new_incident.php id='incident' >";
+            <form role='form' method='POST' action=new_incident.php id='incident' >";
             $form_html = "
                 <div class='form-group'>
                     <label for='inputDate'>Date of Incident</label>
@@ -43,7 +43,7 @@ and open the template in the editor.
 </div>
 ";
             if (isset($_POST['submit_incident'])) {
-
+                include_once 'forms/constants.php';
                 include 'forms/underwriter_connector.php';
                 $fields = array(
                     'incident_date' => filter_input(INPUT_POST, 'incident_date'),
