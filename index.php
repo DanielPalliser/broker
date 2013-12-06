@@ -10,6 +10,13 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <div>
+            
+            <div class="btn-group btn-group-lg">
+                <button type="button" action="new_user.php" class="btn btn-default">Sign In</button>
+                <button type="button" class="btn btn-default">Register</button>
+            </div>
+        </div>     
         <?php
         // put your code here
         ?>
