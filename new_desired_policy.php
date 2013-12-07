@@ -54,12 +54,12 @@ and open the template in the editor.
                     'windscreen_excess' => filter_input(INPUT_POST, 'windscreen_excess'),
                     'api_key' => $_SESSION['api_key']
                 );
-                $reply = send_request($fields, 'POST');
+                $reply = send_post_request($fields, 'desired_policies');
                 if (isset($reply['created_at'])) {
-                    header('location: index.php');
+                    header('location: success.php');
                     exit();
                 } else {
-            include 'forms/errors.php';
+            include_once 'forms/errors.php';
                     #PRINT FORM WITH ERRORS
                     echo $form_header;
                     echo errors_to_html($reply);

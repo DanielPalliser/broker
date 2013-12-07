@@ -12,7 +12,9 @@ and open the template in the editor.
     </head>
     <body>
         <div>
+
             <?php
+            session_start();
             $form_header = "<div class='container'>
     <div class='panel panel-primary'>
         <div class='panel-heading'>Vehicle</div>
@@ -44,19 +46,19 @@ and open the template in the editor.
 ";
             if (isset($_POST['submit_vehicle'])) {
 
-                include 'forms/underwriter_connector.php';
+                include_once 'forms/underwriter_connector.php';
                 $fields = array(
                     'registration' => filter_input(INPUT_POST, 'registration'),
                     'mileage' => filter_input(INPUT_POST, 'mileage'),
-                    'vehicle_value' => filter_input(INPUT_POST, 'vehicle_value'),
+                    'est_value' => filter_input(INPUT_POST, 'vehicle_value'),
                     'parking_loc' => filter_input(INPUT_POST, 'parking_loc'),
                     'api_key' => $_SESSION['api_key']
                 );
-                $reply = send_request($fields, 'POST');
+                $reply = send_post_request($fields, 'vehicles');
                 if (isset($reply['created_at'])) {
                     header('location: new_incident.php');
                 } else {
-                    include 'forms/underwriter_connector.php';
+                    include_once 'forms/errors.php';
                     #PRINT FORM WITH ERRORS
                     echo $form_header;
                     echo errors_to_html($reply);

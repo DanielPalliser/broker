@@ -96,7 +96,7 @@ EOT;
                 'licence_type' => filter_input(INPUT_POST, 'licenceType'),
                 'occupation' => filter_input(INPUT_POST, 'occupation')
             );
-            $reply = send_request($fields, 'POST', 'people');
+            $reply = send_post_request($fields,'person');
             if (isset($reply['created_at'])) {
                 $_SESSION['api_key'] = $reply['api_key'];
                 header('location: new_address.php');

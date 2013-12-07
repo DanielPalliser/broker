@@ -44,7 +44,6 @@ and open the template in the editor.
 </div>
 ";
             if (isset($_POST['submit_incident'])) {
-                include_once 'forms/constants.php';
                 include 'forms/underwriter_connector.php';
                 $fields = array(
                     'incident_date' => filter_input(INPUT_POST, 'incident_date'),
@@ -53,12 +52,12 @@ and open the template in the editor.
                     'description' => filter_input(INPUT_POST, 'description'),
                     'api_key' => $_SESSION['api_key']
                 );
-                $reply = send_request($fields, 'POST');
+                $reply = send_post_request($fields, 'incidents');
                 if (isset($reply['created_at'])) {
                     header('location: new_desired_policy.php');
                     exit();
                 } else {
-
+                    include_once 'forms/errors.php';
                     #PRINT FORM WITH ERRORS
                     echo $form_header;
                     echo errors_to_html($reply);

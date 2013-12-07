@@ -58,7 +58,7 @@ and open the template in the editor.
                     'postcode' => filter_input(INPUT_POST, 'postcode'),
                     'api_key' => $_SESSION['api_key']
                 );
-                $reply = send_request($fields, 'POST', 'addresses');
+                $reply = send_post_request($fields, 'addresses');
                 
                     var_dump($reply);
                 if (isset($reply['created_at'])) {
