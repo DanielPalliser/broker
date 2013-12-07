@@ -13,6 +13,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        session_start();
         $form_header = "<div class='container'>
             <div class='panel panel-primary'>
                 <div class='panel-heading'>Register</div>
@@ -97,7 +98,6 @@ EOT;
             );
             $reply = send_request($fields, 'POST', 'people');
             if (isset($reply['created_at'])) {
-                session_start();
                 $_SESSION['api_key'] = $reply['api_key'];
                 header('location: new_address.php');
                 exit();

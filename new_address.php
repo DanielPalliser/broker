@@ -63,6 +63,7 @@ and open the template in the editor.
                     var_dump($reply);
                 if (isset($reply['created_at'])) {
                     header('location: new_vehicle.php');
+                    exit();
                 } else {
                     include 'forms/errors.php';
                     echo $form_header;

@@ -13,6 +13,7 @@ and open the template in the editor.
     <body>
         <div>
             <?php
+            session_start();
             $form_header = "<div class='container'>
     <div class='panel panel-primary'>
         <div class='panel-heading'>Desired Policy</div>
@@ -51,12 +52,12 @@ and open the template in the editor.
                     'breakdown' => filter_input(INPUT_POST, 'breakdown'),
                     'windscreen' => filter_input(INPUT_POST, 'windscreen'),
                     'windscreen_excess' => filter_input(INPUT_POST, 'windscreen_excess'),
-                    'api_key' => $_SESSION[$api_key]
+                    'api_key' => $_SESSION['api_key']
                 );
                 $reply = send_request($fields, 'POST');
                 if (isset($reply['created_at'])) {
-                    echo 'SUCCESSS!!!!';
-                    header('location: new_address.php');
+                    header('location: index.php');
+                    exit();
                 } else {
             include 'forms/errors.php';
                     #PRINT FORM WITH ERRORS

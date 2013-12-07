@@ -13,6 +13,7 @@ and open the template in the editor.
     <body>
         <div>
             <?php
+            session_start();
             $form_header = "<div class='container'>
     <div class='panel panel-primary'>
         <div class='panel-heading'>Incident</div>
@@ -50,12 +51,12 @@ and open the template in the editor.
                     'incident_type' => filter_input(INPUT_POST, 'incident_type'),
                     'value' => filter_input(INPUT_POST, 'value'),
                     'description' => filter_input(INPUT_POST, 'description'),
-                    'api_key' => $_SESSION[$api_key]
+                    'api_key' => $_SESSION['api_key']
                 );
                 $reply = send_request($fields, 'POST');
                 if (isset($reply['created_at'])) {
-                    echo 'SUCCESSS!!!!';
                     header('location: new_desired_policy.php');
+                    exit();
                 } else {
 
                     #PRINT FORM WITH ERRORS

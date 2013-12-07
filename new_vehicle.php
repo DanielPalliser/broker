@@ -50,11 +50,10 @@ and open the template in the editor.
                     'mileage' => filter_input(INPUT_POST, 'mileage'),
                     'vehicle_value' => filter_input(INPUT_POST, 'vehicle_value'),
                     'parking_loc' => filter_input(INPUT_POST, 'parking_loc'),
-                    'api_key' => $_SESSION[$api_key]
+                    'api_key' => $_SESSION['api_key']
                 );
                 $reply = send_request($fields, 'POST');
                 if (isset($reply['created_at'])) {
-                    echo 'SUCCESSS!!!!';
                     header('location: new_incident.php');
                 } else {
                     include 'forms/underwriter_connector.php';
